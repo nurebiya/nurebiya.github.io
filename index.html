@@ -14,8 +14,6 @@
 </head>
   
 <body>
-  <button onclick="switchLanguage('en')">English</button>
-  <button onclick="switchLanguage('zh-Hant')">中文</button>
   <header> 
     <h1>Welcome to My Website</h1>
         <nav>
@@ -26,6 +24,13 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+     <div class="language-switcher">
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="zh-Hant">中文</option>
+                
+            </select>
+      </div>
   </header>
   
   <main>
