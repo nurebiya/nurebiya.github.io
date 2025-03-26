@@ -18,6 +18,28 @@ header {
     height: 40px; 
 }
 
+.fixed-top-navigation {
+    position: sticky;
+    top: 0;
+    background: #222;
+    color: white;
+    padding: 15px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    z-index: 999;
+}
+
+.fixed-top-navigation a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.fixed-top-navigation a:hover {
+  text-decoration: underline;
+}
+
 nav ul {
     list-style: none;
     margin: 0;
