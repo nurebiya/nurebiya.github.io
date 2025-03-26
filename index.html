@@ -28,12 +28,11 @@
       </nav>
   
      <div class="language-switcher">
-            <select id="language-select">
-                <option value="en">English</option>
-                <option value="zh-Hant">中文</option>
-                <option value="mnc">ᠮᠠᠨᠵᡠ ᡤᡳᠰᡠᠨ</option>
-                
-            </select>
+            <ul id="language-lists">
+                <li class  = "language-label"><input id = "english" class = "button-en" type = "button" onclick = "language('en')" value = "EN"></li>
+                <li class  = "language-label"><input id = "Chinese" class = "button-zh" type = "button" onclick = "language('zh')" value = "漢"></li>
+                <li class  = "language-label"><input id = "Manchu" class = "button-mnc" type = "button" onclick = "language('mnc')" value = "ᠮᠠᠨᠵᡠ"></li>
+            </ul>
       </div>
   
   <main>
