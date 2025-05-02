@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" href="styles.css">
+  
+    <title>Hweichi Meng</title> 
+    <meta name="description" content="Personal Web">
+    <meta name="keywords" content="Semantics and Philosophy">
+    <meta name="author" content="Hweichi">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/logistics/lambda-icon.svg" type="image/svg+xml"> 
+</head>
+
+<body>
+    <section id="intro" class = "intro">
+        <div greeting>
+
+        </div>
+        <div class = "introduction">
+            <div intro-words>
+            <h2>Hello, there!
+            </h2>
+            <p>This is the contact section of the website.</p>
+            </div>
+            <div intro-pic>
+
+            </div>
+        </div>
+    </section>
+
+    <nav id = "navbar" class = "navigation">
+      <div data-container = "navigation">
+        
+          <ul id = "menu">
+              <li><a href="index.html">About</a></li>
+              <li><a href="research.html">Research</a></li>
+              <li><a href="teaching.html">Teaching</a></li>
+              <li><a href="projects.html">Projects</a></li>
+          </ul>
+        
+      </div>
+    </nav>
+
+    <script>
+        var navbar = document.getElementById("navbar");
+        var menu = document.getElementById("menu");
+
+        window.onscroll = function(){
+            if(window.pageYOffset >= window.innerHeight){
+                navbar.classList.add("sticky");
+            }
+            else{
+                navbar.classList.remove("sticky");
+            }
+        }
+    </script>
+   <div class="language-switcher">
+          <ul id="language-lists">
+              <li class  = "language-label"><input id = "english" class = "button-en" type = "button" onclick = "language('en')" value = "EN"></li>
+              <li class  = "language-label"><input id = "Chinese" class = "button-zh" type = "button" onclick = "language('zh')" value = "漢"></li>
+              <li class  = "language-label"><input id = "Manchu" class = "button-mnc" type = "button" onclick = "language('mnc')" value = "ᠮᠠᠨᠵᡠ"></li>
+          </ul>
+    </div>
+
+    <main>
+
+      <section class = "index">
+        <div id="about">
+          <h2>About</h2>
+          <p>This is the about section of the website.</p>
+      </div>
+      <div id="services">
+          <h2>Services</h2>
+          <p>This is the services section of the website.</p>
+      </div>
+      <div id="contact">
+          <h2>Contact</h2>
+          <p>This is the contact section of the website.</p>
+      </div>
+  </main>
+
+  <footer>
+      <p>Copyright &copy; Huiqi Meng. All rights reserved.</p>
+  </footer>
+</body>
+</html>

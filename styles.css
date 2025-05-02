@@ -1,9 +1,20 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family:Arial, sans-setif;
-  background-color: #A6247E;
+  background-color: #926a88;
   color:#333;
-  margin: 0;
-  padding: 20px;
+  
+  
 }
 
 header {
@@ -11,32 +22,58 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: #333;
-    padding: 10px 20px;
+    padding: 0;
+}
+
+.intro {
+  background-color: coral;
+  height: 95vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+.introduction {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+}
+
+nav.sticky{
+  position: fixed;
+  top: 0;
 }
 
 .logo img {
     height: 40px; 
 }
 
-.fixed-top-navigation {
+.navigation {
     position: sticky;
     top: 0;
+    width: 100vw;
     background: #222;
     color: white;
     padding: 15px;
     display: flex;
     gap: 30px;
-    justify-content: center;
+    justify-content: space-evenly;
     z-index: 999;
 }
 
-.fixed-top-navigation a {
+.navigation a {
   color: white;
   text-decoration: none;
   font-weight: bold;
 }
 
-.fixed-top-navigation a:hover {
+.navigation li {
+  display: inline;
+  margin-inline: 8vw;
+}
+
+.navigation a:hover {
   text-decoration: underline;
 }
 
@@ -54,4 +91,18 @@ header {
 }
 hl {
   color: #2c3e50;
+}
+
+.index {
+  height: 200vh
+}
+
+footer {
+  background-color: #222;
+  color: #555;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: medium;
 }
