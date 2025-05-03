@@ -30,14 +30,54 @@ header {
   height: 95vh;
   width: 100vw;
   display: flex;
-  justify-content: space-evenly;
 }
+
+.greeting {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.greeting h1 {
+color: #222;
+font-family: 'Helvetica',  
+  'Source Han Sans SC', 
+  'PingFang SC', 
+  'Source Han Sans JP', 'Noto Sans Thai','Noto Sans Tibetan',
+  'Source Han Sans KR', 'Padauk',
+  'Noto Sans Arabic', 'Noto Sans Cyrillic', 'Noto Sans Greek',
+  'Noto Sans Hebrew','Noto Sans Devanagari','Noto Sans Sinhala',
+  sans-serif;
+font-size: 120px;
+font-weight: 300;
+}
+
+span.mark {
+  display: inline-block;
+  border-bottom: 10px solid #222;
+  width: 50px;
+  vertical-align: text-bottom;
+  animation: blink 0.6s step-end infinite;
+}
+
+@keyframes blink {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #222;
+  }
+}
+
 .introduction {
   width: 50%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content:center;
+  padding-left: 10%;
+  justify-content: center;
 }
 
 nav.sticky{
