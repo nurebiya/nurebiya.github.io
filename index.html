@@ -7,9 +7,7 @@
   
     <title>Hweichi Meng</title> 
     <meta name="description" content="Personal Web">
-    <meta name="keywords" content="Semantics and Philosophy">
     <meta name="author" content="Hweichi">
-    <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="/logistics/lambda-icon.svg" type="image/svg+xml"> 
 </head>
 
@@ -18,9 +16,9 @@
         <div class = "greeting">
             <h1>
                 <span id = "greetings" data-greeting ='["Hello", "saiyvn",
-                    "你好", "Γεια σου", "Привет", "สวัสดี","Ciao","Haigh",
-                    "Salve","नमस्ते", "Xin chào", "Jambo",
-                    "こんにちは", "السلام عليكم", "བཀྲ་ཤིས་བདེ་ལེགས།",
+                    "你好", "Γεια σου", "Привет", "สวัสดี","Ciao","Haigh","Hæ",
+                    "Salve","नमस्ते", "Xin chào", "Jambo","Merhaba","Hej","Hei",
+                    "こんにちは", "བཀྲ་ཤིས་བདེ་ལེགས།", "Hola", "Olá","Сәлем","",
                     "Hallo", "မင်္ဂလာပါ","ආයුබෝවන්","ꦱꦼꦒꦼꦤ꧀ꦫꦮꦸꦃ","Bonjour",
                     "안녕하세요"]'></span><span class = "mark"></span>
             </h1>
@@ -29,7 +27,7 @@
             <div intro-words>
             <h2>Hello, there!
             </h2>
-            <p>This is the contact section of the website.</p>
+            <p>Here dwells an apprentice in reseaerch, writing, and education.</p>
             </div>
             <div intro-pic>
 
@@ -41,10 +39,11 @@
       <div data-container = "navigation">
         
           <ul id = "menu">
-              <li><a href="index.html">About</a></li>
+              <li><a href="#about">About</a></li>
               <li><a href="research.html">Research</a></li>
               <li><a href="teaching.html">Teaching</a></li>
               <li><a href="projects.html">Projects</a></li>
+              <li><a href="cv.html">Curriculum Vitae</a></li>
           </ul>
         
       </div>
@@ -63,29 +62,23 @@
             }
         }
     </script>
-   <div class="language-switcher">
-          <ul id="language-lists">
-              <li class  = "language-label"><input id = "english" class = "button-en" type = "button" onclick = "language('en')" value = "EN"></li>
-              <li class  = "language-label"><input id = "Chinese" class = "button-zh" type = "button" onclick = "language('zh')" value = "漢"></li>
-              <li class  = "language-label"><input id = "Manchu" class = "button-mnc" type = "button" onclick = "language('mnc')" value = "ᠮᠠᠨᠵᡠ"></li>
-          </ul>
-    </div>
 
-    <main>
+
+    <main class = "wrapper">
 
       <section class = "index">
+        <container>
         <div id="about">
           <h2>About</h2>
-          <p>This is the about section of the website.</p>
-      </div>
-      <div id="services">
-          <h2>Services</h2>
+          <p>Hi, I am <span style = "font-size: x-large;">Huiqi Meng</span> [xweɪ˥˩ tɕʰi˧˥ mɤŋ˥˩].</p>
+          <p>An apprentice in Reseaerch, Writing, and Education</p>
+        </div>
+        </container>
+      <div id="news">
+          <h2>News</h2>
           <p>This is the services section of the website.</p>
       </div>
-      <div id="contact">
-          <h2>Contact</h2>
-          <p>This is the contact section of the website.</p>
-      </div>
+
   </main>
 
   <footer>
@@ -93,5 +86,6 @@
   </footer>
 
   <script src = "index.js"></script> 
+
 </body>
 </html>

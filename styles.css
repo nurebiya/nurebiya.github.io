@@ -25,6 +25,10 @@ header {
     padding: 0;
 }
 
+/* ===============================
+        Homepage - Greeting
+   =============================== */
+
 .intro {
   background-color: coral;
   height: 95vh;
@@ -80,6 +84,10 @@ span.mark {
   justify-content: center;
 }
 
+/* ===============================
+           Sticky Navigator
+   =============================== */
+
 nav.sticky{
   position: fixed;
   top: 0;
@@ -110,31 +118,103 @@ nav.sticky{
 
 .navigation li {
   display: inline;
-  margin-inline: 8vw;
+  margin-inline: 5vw;
 }
 
 .navigation a:hover {
   text-decoration: underline;
 }
 
-.language-switcher select {
-    padding: 5px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    background-color: #444;
-    color: white;
+/* ===============================
+              Subpages
+   =============================== */
+
+.banner {
+  background-color: coral;
+  height: 15vh;
+  width: 100vw;
+  display: flex;
 }
 
-.language-switcher select:hover {
-    background-color: #555;
+.scrolling {
+  width: 90%;
+  max-width: 1536px;
+  margin-inline: auto;
+  position: relative;
+  height: 270px;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1) 5%,
+    rgb(0, 0, 0, 1) 95%,
+    rgba(0, 0, 0, 0)
+    );
 }
+
+@keyframes scrollLeft {
+  from {
+
+  }
+
+  to {
+    left: -340px;
+  }
+}
+
+.card {
+  width: 340px;
+  height: 270px;
+  background-color: antiquewhite;
+  border-radius: 6px;
+  position: absolute;
+  left: calc(340px * 5);
+  animation-name: scrollLeft;
+  animation-duration: 30s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+   
+.card1 {
+  animation-delay: calc(30s / 5 * (5 - 1) * -1);
+}
+
+.card2 {
+  animation-delay: calc(30s / 5 * (5 - 2) * -1);
+}
+
+.card3 {
+  animation-delay: calc(30s / 5 * (5 - 3) * -1);
+}
+
+.card4 {
+  animation-delay: calc(30s / 5 * (5 - 4) * -1);
+}
+
+.card5 {
+  animation-delay: calc(30s / 5 * (5 - 5) * -1);
+}
+
+/* ===============================
+                Body
+   =============================== */
+
 hl {
   color: #2c3e50;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
 .index {
-  height: 200vh
+  flex: 1;
+  width: 100vw;
 }
 
 footer {
