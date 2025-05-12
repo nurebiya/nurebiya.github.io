@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" href="styles.css">
+  
+    <title>Hweichi Meng</title> 
+    <meta name="description" content="Personal Web">
+    <meta name="author" content="Hweichi">
+    <link rel="icon" href="/logistics/lambda-icon.svg" type="image/svg+xml">
+</head>
+<body>
+    <section id="banner" class = "banner">
 
+    </section>
+
+    <nav id = "navbar" class = "navigation">
+      <div data-container = "navigation">
+        
+          <ul id = "menu">
+            <li><a href="index.html#about">About</a></li>
+            <!--<li><a href="research.html">Research</a></li>-->
+            <li><a href="teaching.html">Teaching</a></li>
+            <!--<li><a href="projects.html">Projects</a></li>-->
+            <li><a href="cv.html">Curriculum Vitae</a></li>
+          </ul>
+        
+      </div>
+    </nav>
+
+    <script>
+        var navbar = document.getElementById("navbar");
+        var menu = document.getElementById("menu");
+
+        window.onscroll = function(){
+            if(window.pageYOffset >= window.innerHeight){
+                navbar.classList.add("sticky");
+            }
+            else{
+                navbar.classList.remove("sticky");
+            }
+        }
+    </script>
+
+
+    <main class = "wrapper">
+
+      <section class = "index">
+        <div style="display: flex; justify-content: center; flex-direction: column; margin-top: 10vh;">
+            <div style="margin: auto; font-family: Forum">
+                <h2>CURRICULUM VITAE</h2>
+            </div>
+
+        </div>
+
+        <div style="display: flex; justify-content: center; flex-direction: column; margin: 30px auto 50px;">
+            <div style="margin: auto;">
+                <iframe src="https://drive.google.com/file/d/1rJ1e1LtMLRSthQyZaq3O18bfODMr7_2k/preview" width="800px" height="1000px">
+                </iframe>
+            </div>
+        </div>
+
+    </main>
+  <footer>
+      <p>Copyright &copy; Huiqi Meng. All rights reserved.</p>
+  </footer>
+</body>
+</html>

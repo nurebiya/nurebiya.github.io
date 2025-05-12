@@ -30,7 +30,7 @@ header {
    =============================== */
 
 .intro {
-  background-color: coral;
+  background-color: #003153;
   height: 95vh;
   width: 100vw;
   display: flex;
@@ -45,12 +45,12 @@ header {
 }
 
 .greeting h1 {
-color: #222;
+color: #fff2df;
 font-family: 'Helvetica',  
   'Source Han Sans SC', 
   'PingFang SC', 
   'Source Han Sans JP', 'Noto Sans Thai','Noto Sans Tibetan',
-  'Source Han Sans KR', 'Padauk',
+  'Source Han Sans KR', 'Padauk', 'Mongolian Baiti',
   'Noto Sans Arabic', 'Noto Sans Cyrillic', 'Noto Sans Greek',
   'Noto Sans Hebrew','Noto Sans Devanagari','Noto Sans Sinhala',
   sans-serif;
@@ -60,7 +60,7 @@ font-weight: 300;
 
 span.mark {
   display: inline-block;
-  border-bottom: 10px solid #222;
+  border-bottom: 10px solid #fff2df;
   width: 50px;
   vertical-align: text-bottom;
   animation: blink 0.6s step-end infinite;
@@ -72,7 +72,7 @@ span.mark {
     border-color: transparent;
   }
   50% {
-    border-color: #222;
+    border-color: #fff2df;
   }
 }
 
@@ -101,8 +101,8 @@ nav.sticky{
     position: sticky;
     top: 0;
     width: 100vw;
-    background: #222;
-    color: white;
+    background: #2f2f2f;
+    color: #fff2df;
     padding: 15px;
     display: flex;
     gap: 30px;
@@ -111,7 +111,7 @@ nav.sticky{
 }
 
 .navigation a {
-  color: white;
+  color: #fff2df;
   text-decoration: none;
   font-weight: bold;
 }
@@ -130,10 +130,34 @@ nav.sticky{
    =============================== */
 
 .banner {
-  background-color: coral;
+  background-color: #003153;
   height: 15vh;
   width: 100vw;
   display: flex;
+}
+
+.kapian {
+  position: relative;
+  width: 340px;
+  height: 300px;
+  background-color: antiquewhite;
+  border-radius: 40px;
+  transition: 0.5s;
+  overflow: hidden;
+  top: 0;
+  
+}
+
+.kapian:hover {
+  height: 400px;
+  top: -60px;
+}
+
+.kapian .imgBX {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background-color: #222;
 }
 
 .scrolling {
@@ -169,6 +193,7 @@ nav.sticky{
   height: 270px;
   background-color: antiquewhite;
   border-radius: 6px;
+  padding: 20px; 
   position: absolute;
   left: calc(340px * 5);
   animation-name: scrollLeft;
@@ -203,6 +228,18 @@ nav.sticky{
 
 hl {
   color: #2c3e50;
+}
+
+.datouzhao {
+  width: 330px;      
+  height: 450px;     
+  overflow: hidden;  
+}
+
+.datouzhao img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
 }
 
 .wrapper {
