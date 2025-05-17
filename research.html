@@ -1,60 +1,64 @@
 <!DOCTYPE html>
-<html lang= "en">
+<html lang="en">
 <head>
-  <meta charset= "UTF-8">
-  <meta name= "viewport" content="width=device-width, initial-scale=1.0">
-  <link rel= "stylesheet" href="styles.css">
-  
-  <title>Hweichi Meng</title> 
-  <meta name="description" content="Personal Web">
-  <meta name="keywords" content="Semantics and Philosophy">
-  <meta name="author" content="Hweichi">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="/logistics/lambda-icon.svg" type="image/svg+xml"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" href="styles.css">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Hweichi Meng</title> 
+    <meta name="description" content="Personal Web">
+    <meta name="author" content="Hweichi">
+    <link rel="icon" href="/logistics/lambda-icon.svg" type="image/svg+xml">
 </head>
-  
 <body>
-  <header> 
-    <h1>Research</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">About</a></li>
-                <li><a href="research.html">Research</a></li>
-                <li><a href="teaching.html">Teaching</a></li>
-                <li><a href="projects.html">Projects</a></li>
-            </ul>
-        </nav>
-     <div class="language-switcher">
-            <select id="language-select">
-                <option value="en">English</option>
-                <option value="zh-Hant">中文</option>
-                <option value="mnc">ᠮᠠᠨᠵᡠ ᡤᡳᠰᡠᠨ</option>
-                
-            </select>
-      </div>
-  </header>
-  
-  <main>
-        <section id="home">
-            <h2>Home</h2>
-            <p>This is the home section of the website.</p>
-        </section>
-        <section id="about">
-            <h2>About</h2>
-            <p>This is the about section of the website.</p>
-        </section>
-        <section id="services">
-            <h2>Services</h2>
-            <p>This is the services section of the website.</p>
-        </section>
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>This is the contact section of the website.</p>
-        </section>
-    </main>
+    <section id="banner" class = "banner">
 
-    <footer>
-        <p>&copy; 2025 My Website. All rights reserved.</p>
-    </footer>
+    </section>
+
+    <nav id = "navbar" class = "navigation">
+      <div data-container = "navigation">
+        
+          <ul id = "menu">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="teaching.html">Teaching</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="cv.html">Curriculum Vitae</a></li>
+          </ul>
+        
+      </div>
+    </nav>
+
+    <script>
+        var navbar = document.getElementById("navbar");
+        var menu = document.getElementById("menu");
+
+        window.onscroll = function(){
+            if(window.pageYOffset >= window.innerHeight){
+                navbar.classList.add("sticky");
+            }
+            else{
+                navbar.classList.remove("sticky");
+            }
+        }
+    </script>
+
+
+    <main class = "wrapper">
+
+      <section class = "index">
+        <div style="display: flex; justify-content: center; flex-direction: column; margin-top: 10vh;">
+            <div style="margin: auto; font-family: Forum">
+                <h2>RESEARCH</h2>
+            </div>
+
+        </div>
+
+
+
+    </main>
+  <footer>
+      <p>Copyright &copy; Huiqi Meng. All rights reserved.</p>
+  </footer>
 </body>
 </html>
