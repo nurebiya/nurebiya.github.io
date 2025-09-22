@@ -583,16 +583,15 @@
                                     </div>
                                     
                                     <div className="flex justify-center">
-                                        <button
-                                            onClick={() => {
-                                                // TODO: 在这里添加简历PDF查看逻辑
-                                                alert('简历PDF文件尚未添加，请将简历PDF文件集成到此功能中');
-                                            }}
+                                        <a
+                                            href="./resume.pdf"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg flex items-center space-x-3 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                                         >
                                             <span className="text-2xl">👁️</span>
                                             <span>查看我的简历</span>
-                                        </button>
+                                        </a>
                                     </div>
 
                                     <div className="mt-8 text-sm text-gray-500">
