@@ -442,6 +442,46 @@
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
+            // 监听卡片容器的滚动事件，更新当前激活的卡片
+            useEffect(() => {
+                const cardContainer = cardContainerRef.current;
+                if (!cardContainer) return;
+
+                const handleCardScroll = () => {
+                    const containerHeight = cardContainer.clientHeight;
+                    const scrollTop = cardContainer.scrollTop;
+                    
+                    // 计算当前显示的卡片索引
+                    // 使用 Math.round 来确定最接近的卡片
+                    const currentCardIndex = Math.round(scrollTop / containerHeight);
+                    
+                    // 确保索引在有效范围内 (0-3)
+                    const validIndex = Math.max(0, Math.min(currentCardIndex, 3));
+                    
+                    // 只有当索引真的改变时才更新状态
+                    setActiveCard(prevIndex => prevIndex !== validIndex ? validIndex : prevIndex);
+                };
+
+                // 立即执行一次以设置初始状态
+                handleCardScroll();
+                
+                cardContainer.addEventListener('scroll', handleCardScroll);
+                
+                // 添加防抖以提高性能
+                let timeoutId;
+                const debouncedScroll = () => {
+                    clearTimeout(timeoutId);
+                    timeoutId = setTimeout(handleCardScroll, 10);
+                };
+                
+                cardContainer.addEventListener('scroll', debouncedScroll);
+                return () => {
+                    cardContainer.removeEventListener('scroll', handleCardScroll);
+                    cardContainer.removeEventListener('scroll', debouncedScroll);
+                    clearTimeout(timeoutId);
+                };
+            }, []);
+
             const cardData = {
                 products: [
                     {
