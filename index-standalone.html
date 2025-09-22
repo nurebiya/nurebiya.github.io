@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我最喜爱的 AI 产品</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+        }
+        
+        .glass-morphism {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .gradient-blob {
+            background: linear-gradient(45deg, 
+                rgba(59, 130, 246, 0.1),
+                rgba(147, 51, 234, 0.1),
+                rgba(236, 72, 153, 0.1)
+            );
+            filter: blur(40px);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .aha-highlight {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+            border-left: 4px solid #3b82f6;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes bounceGentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-bounce-gentle {
+            animation: bounceGentle 2s ease-in-out infinite;
+        }
+        
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        
+        /* Card switching styles */
+        .card-container {
+            height: 100vh;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+        }
+        
+        .card-slide {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        /* Progress indicator */
+        .progress-indicator {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid #9ca3af;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-dot.active {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            transform: scale(1.25);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Navigation Component
+        const Navigation = ({ isScrolled }) => {
+            const scrollToSection = (sectionId) => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            return (
+                <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+                    isScrolled ? 'glass-morphism shadow-lg' : 'bg-transparent'
+                }`}>
+                    <div className="max-w-7xl mx-auto px-6 py-4">
+                        <div className="flex items-center justify-between">
+                            <div className="text-xl font-bold text-gray-800">
+                                AI 产品展示
+                            </div>
+                            <div className="hidden md:flex items-center space-x-8">
+                                <button
+                                    onClick={() => document.getElementById('card-0').scrollIntoView({ behavior: 'smooth' })}
+                                    className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+                                >
+                                    产品体验
+                                </button>
+                                <button
+                                    onClick={() => document.getElementById('card-2').scrollIntoView({ behavior: 'smooth' })}
+                                    className="text-gray-700 hover:text-orange-600 transition-colors duration-200 font-medium"
+                                >
+                                    问题分析
+                                </button>
+                                <button
+                                    onClick={() => document.getElementById('card-3').scrollIntoView({ behavior: 'smooth' })}
+                                    className="text-gray-700 hover:text-green-600 transition-colors duration-200 font-medium"
+                                >
+                                    优化建议
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            );
+        };
+
+        // Hero Component
+        const Hero = () => {
+            return (
+                <section className="min-h-screen relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
+                    {/* Background Blobs */}
+                    <div className="absolute inset-0">
+                        <div className="absolute top-20 left-10 w-72 h-72 gradient-blob rounded-full animate-float opacity-30"></div>
+                        <div className="absolute bottom-20 right-10 w-96 h-96 gradient-blob rounded-full animate-float opacity-20" style={{animationDelay: '2s'}}></div>
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 gradient-blob rounded-full opacity-25"></div>
+                    </div>
+
+                    <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20">
+                        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+                            <div className="space-y-8">
+                                <h1 className="text-5xl lg:text-7xl font-bold text-gray-800 leading-tight">
+                                    我最喜爱的
+                                    <br />
+                                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                        AI 产品
+                                    </span>
+                                </h1>
+                                
+                                <p className="text-xl text-gray-600 max-w-lg leading-relaxed">
+                                    探索改变我们工作和生活方式的人工智能产品，
+                                    分享使用体验与优化建议
+                                </p>
+
+                                <div className="flex flex-wrap gap-4">
+                                    <button 
+                                        onClick={() => document.getElementById('card-0').scrollIntoView({ behavior: 'smooth' })}
+                                        className="px-4 py-2 bg-white/80 rounded-full text-sm font-medium text-gray-700 shadow-md hover:bg-blue-50 hover:text-blue-700 hover:shadow-lg transition-all duration-200 cursor-pointer"
+                                    >
+                                        产品体验
+                                    </button>
+                                    <button 
+                                        onClick={() => document.getElementById('card-2').scrollIntoView({ behavior: 'smooth' })}
+                                        className="px-4 py-2 bg-white/80 rounded-full text-sm font-medium text-gray-700 shadow-md hover:bg-orange-50 hover:text-orange-700 hover:shadow-lg transition-all duration-200 cursor-pointer"
+                                    >
+                                        问题分析
+                                    </button>
+                                    <button 
+                                        onClick={() => document.getElementById('card-3').scrollIntoView({ behavior: 'smooth' })}
+                                        className="px-4 py-2 bg-white/80 rounded-full text-sm font-medium text-gray-700 shadow-md hover:bg-green-50 hover:text-green-700 hover:shadow-lg transition-all duration-200 cursor-pointer"
+                                    >
+                                        优化建议
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="relative flex items-center justify-center">
+                                <div className="w-80 h-80 relative">
+                                    <div className="absolute inset-0 border-4 border-blue-200 rounded-full opacity-60"></div>
+                                    <div className="absolute inset-8 border-4 border-purple-200 rounded-full opacity-80"></div>
+                                    <div className="absolute inset-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full shadow-2xl flex items-center justify-center">
+                                        <div className="text-white text-6xl font-bold">AI</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+                            <button
+                                onClick={() => document.getElementById('products').scrollIntoView({ behavior: 'smooth' })}
+                                className="flex flex-col items-center space-y-2 text-gray-600 hover:text-blue-600 transition-colors duration-200 animate-bounce-gentle"
+                            >
+                                <span className="text-sm font-medium">向下滚动</span>
+                                <span className="text-2xl">↓</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Product Card Component
+        const ProductCard = ({ title, description, ahamoment, bulletPoints, cardNumber }) => {
+            return (
+                <div className="bg-white rounded-3xl card-shadow p-8 lg:p-12 max-w-4xl mx-auto">
+                    <div className="flex items-center justify-between mb-8">
+                        <div className="flex items-center space-x-4">
+                            <h2 className="text-4xl lg:text-5xl font-bold text-gray-800">
+                                {title}
+                            </h2>
+                            {title === '语鲸' && (
+                                <a 
+                                    href="https://lingowhale.com/" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="flex items-center space-x-2 bg-blue-50 hover:bg-blue-100 text-blue-600 hover:text-blue-700 px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium shadow-sm hover:shadow-md"
+                                >
+                                    <span>🔗</span>
+                                    <span>官方网站</span>
+                                </a>
+                            )}
+                            {title === '星流' && (
+                                <a 
+                                    href="https://www.xingliu.art/" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="flex items-center space-x-2 bg-purple-50 hover:bg-purple-100 text-purple-600 hover:text-purple-700 px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium shadow-sm hover:shadow-md"
+                                >
+                                    <span>🎨</span>
+                                    <span>官方网站</span>
+                                </a>
+                            )}
+                        </div>
+                        <div className="text-sm text-gray-400 font-medium">
+                            {cardNumber}/4
+                        </div>
+                    </div>
+
+                    {/* 简概部分 */}
+                    {description && (
+                        <div className="mb-8">
+                            <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                                简概
+                            </h3>
+                            <p className="text-lg text-gray-600 leading-relaxed">
+                                {description}
+                            </p>
+                        </div>
+                    )}
+
+                    {/* Aha Moment部分 */}
+                    {(ahamoment || (bulletPoints && bulletPoints.length > 0 && bulletPoints.some(point => point))) && (
+                        <div className="aha-highlight rounded-2xl p-6 mb-8">
+                            <div className="flex items-start space-x-3">
+                                <span className="text-blue-600 text-2xl">💡</span>
+                                <div className="w-full">
+                                    <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                                        Aha Moment
+                                    </h3>
+                                    <div className="space-y-4">
+                                        {bulletPoints && bulletPoints.filter(point => point).map((point, index) => (
+                                            <div key={index} className="flex items-start space-x-3">
+                                                <div className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
+                                                    {index + 1}
+                                                </div>
+                                                <span className="text-gray-700 leading-relaxed">
+                                                    {point}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {!description && !ahamoment && (!bulletPoints || bulletPoints.length === 0 || !bulletPoints.some(point => point)) && (
+                        <div className="text-center py-12">
+                            <div className="text-gray-400 text-lg">
+                                [内容待填充]
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        // Experience Card Component
+        const ExperienceCard = ({ products, cardNumber }) => {
+            return (
+                <div className="bg-white rounded-3xl card-shadow p-8 lg:p-12 max-w-4xl mx-auto">
+                    <div className="flex items-center justify-between mb-8">
+                        <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 flex items-center space-x-4">
+                            <span className="text-orange-500 text-5xl">⚠️</span>
+                            <span>体验问题</span>
+                        </h2>
+                        <div className="text-sm text-gray-400 font-medium">
+                            {cardNumber}/4
+                        </div>
+                    </div>
+
+                    <div className="space-y-8">
+                        {products.map((product, index) => (
+                            <div key={product.name} className="border-l-4 border-orange-400 pl-6 py-4">
+                                <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                                    {product.name}
+                                </h3>
+                                
+                                {product.issues && product.issues.length > 0 && product.issues.some(issue => issue) ? (
+                                    <ul className="space-y-3">
+                                        {product.issues.filter(issue => issue).map((issue, issueIndex) => (
+                                            <li key={issueIndex} className="flex items-start space-x-3">
+                                                <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                                                <span className="text-gray-700 leading-relaxed">
+                                                    {issue}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <div className="text-gray-400 italic">
+                                        [问题待填充]
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        // Optimization Card Component
+        const OptimizationCard = ({ products, cardNumber }) => {
+            return (
+                <div className="bg-white rounded-3xl card-shadow p-8 lg:p-12 max-w-6xl mx-auto">
+                    <div className="flex items-center justify-between mb-8">
+                        <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 flex items-center space-x-4">
+                            <span className="text-green-600 text-5xl">⚙️</span>
+                            <span>优化建议</span>
+                        </h2>
+                        <div className="text-sm text-gray-400 font-medium">
+                            {cardNumber}/4
+                        </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-6 mb-8">
+                        <div className="flex items-center space-x-3 mb-3">
+                            <span className="text-green-600 text-2xl">💡</span>
+                            <h3 className="text-lg font-semibold text-gray-800">
+                                如果我是产品经理
+                            </h3>
+                        </div>
+                        <p className="text-gray-600">
+                            基于用户体验分析，以下是我的优化建议和产品改进思路
+                        </p>
+                    </div>
+
+                    {/* 并列的两个产品卡片 */}
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {products.map((product, index) => (
+                            <div key={product.name} className="bg-gray-50 rounded-2xl p-6 border-l-4 border-green-500">
+                                <h3 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center space-x-2">
+                                    <span className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                        {index + 1}
+                                    </span>
+                                    <span>{product.name}</span>
+                                </h3>
+                                
+                                {product.optimizations && product.optimizations.length > 0 && product.optimizations.some(opt => opt) ? (
+                                    <div className="space-y-4">
+                                        {product.optimizations.filter(opt => opt).map((optimization, optIndex) => (
+                                            <div key={optIndex} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+                                                <div className="flex items-start space-x-3">
+                                                    <div className="w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                                                        {optIndex + 1}
+                                                    </div>
+                                                    <span className="text-gray-700 leading-relaxed text-sm">
+                                                        {optimization}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="text-gray-400 italic">
+                                        [优化建议待填充]
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            const [isScrolled, setIsScrolled] = useState(false);
+            const [activeCard, setActiveCard] = useState(0);
+            const cardContainerRef = useRef(null);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setIsScrolled(window.scrollY > 50);
+                };
+
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const cardData = {
+                products: [
+                    {
+                        title: '语鲸',
+                        description: '通过"频道"对新闻、论文、公众号文章等实时更新信息进行分类，并用AI整合归纳用户订阅频道的信息聚合应用',
+                        ahamoment: 'AI每日自动将所有订阅频道信息总结成日报，并支持语音播放，能在无需盯屏的情况下完成信息获取',
+                        bulletPoints: [
+                            '既有的频道种类丰富，涵盖大量技术相关信息源',
+                            '能通过RSS或网页链接自定义频道',
+                            'AI每日自动将所有订阅频道信息总结成日报，并支持语音播放，能在无需盯屏的情况下完成信息获取'
+                        ]
+                    },
+                    {
+                        title: '星流',
+                        description: '通过multi agent实现图片、视频、海报及IP概念图等视觉作品设计的vibe design应用',
+                        ahamoment: '星流的无限画布允许用户以非线性化的形式创作，能从多个设计素材中框选特定几个素材通过prompt进行修改迭代，并保留原始版本进行比对',
+                        bulletPoints: [
+                            '星流的无限画布允许用户以非线性化的形式创作，能从多个设计素材中框选特定几个素材通过prompt进行修改迭代，并保留原始版本进行比对',
+                            'Agent在设计过程中会提供差异化的多个设计方向供用户挑选，避免灵感枯竭',
+                            '内置微调模型内容平台，允许用户分享自己的微调的LoRA组件并允许用户使用其他人分享的组件进行个性化视觉品生成'
+                        ]
+                    }
+                ],
+                experienceGaps: [
+                    {
+                        name: '语鲸',
+                        issues: [
+                            '只支持生成日报，不能自定义时间区间生成。长时间没看后想要快速了解过去几天的信息比较麻烦',
+                            '只能基于所有的信息生成一个总的日报，不允许用户挑选特定的几个类型的信息源生成日报',
+                            '不支持抓取社交平台特定用户的分享，损失了一大类优质信息源，信息的时效性和灵活性略不理想',
+                            '没法进行针对性推送，一些来自相同信息源但是用户不感兴趣的信息也会被推送，论文大批量更新的时候会刷屏'
+                        ]
+                    },
+                    {
+                        name: '星流',
+                        issues: [
+                            '视频基于预设的知识库生成，脚本和分镜方式相似，不像真实电影那样富于变化',
+                            '生成的人物服装常出现时代错配或世界观错配',
+                            '生成的旁白音色单调，语气平淡，偶尔有怪异声'
+                        ]
+                    }
+                ],
+                optimizations: [
+                    {
+                        name: '语鲸',
+                        optimizations: [
+                            '增加自定义时间区间和自定义信息源总结，解决信息回顾和信息聚焦问题',
+                            '在阅读时长、点击率等方面埋点，或者增加反馈机制（如"不感兴趣"选项），自动分析用户喜好并基于此优化个性化推送策略',
+                            '通过RSS插件、官方API或者OAuth授权实现社媒定向抓取，允许用户自定义抓取对象'
+                        ]
+                    },
+                    {
+                        name: '星流',
+                        optimizations: [
+                            '内置内容平台开放用户设计及分享自己的脚本和分镜框架的功能，让非专业出身用户也能提高视频生成效果，同时知识库和模型本身也可以基于这些新内容不断迭代优化',
+                            '内置内容平台开放用户设计及分享自己的世界观包的功能，世界观包可作为即插即用的知识库组件，内容可囊括背景知识文本、设定图、甚至音效',
+                            '接入F5 TTS或CosyVoice等前沿声音克隆模型，允许用户定制配音音色、语气以及风格'
+                        ]
+                    }
+                ]
+            };
+
+
+            const scrollToCard = (index) => {
+                const cardElement = document.getElementById(`card-${index}`);
+                if (cardElement) {
+                    cardElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            return (
+                <div className="min-h-screen bg-white">
+                    <Navigation isScrolled={isScrolled} />
+                    
+                    <Hero />
+
+                    {/* Progress Indicator */}
+                    <div className="progress-indicator">
+                        {[0, 1, 2, 3].map((index) => (
+                            <div
+                                key={index}
+                                className={`progress-dot ${activeCard === index ? 'active' : ''}`}
+                                onClick={() => scrollToCard(index)}
+                            />
+                        ))}
+                        <div className="text-xs text-gray-500 text-center mt-2">
+                            {activeCard + 1}/4
+                        </div>
+                    </div>
+
+                    {/* Cards Section */}
+                    <div id="products" className="card-container" ref={cardContainerRef}>
+                        <div id="card-0" className="card-slide">
+                            <ProductCard
+                                title={cardData.products[0].title}
+                                description={cardData.products[0].description}
+                                ahamoment={cardData.products[0].ahamoment}
+                                bulletPoints={cardData.products[0].bulletPoints}
+                                cardNumber="1"
+                            />
+                        </div>
+
+                        <div id="card-1" className="card-slide">
+                            <ProductCard
+                                title={cardData.products[1].title}
+                                description={cardData.products[1].description}
+                                ahamoment={cardData.products[1].ahamoment}
+                                bulletPoints={cardData.products[1].bulletPoints}
+                                cardNumber="2"
+                            />
+                        </div>
+
+                        <div id="card-2" className="card-slide">
+                            <ExperienceCard
+                                products={cardData.experienceGaps}
+                                cardNumber="3"
+                            />
+                        </div>
+
+                        <div id="card-3" className="card-slide">
+                            <OptimizationCard
+                                products={cardData.optimizations}
+                                cardNumber="4"
+                            />
+                        </div>
+                        </div>
+
+                        {/* Resume Section */}
+                        <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+                            <div className="max-w-4xl mx-auto px-6 text-center">
+                                <div className="bg-white rounded-3xl shadow-lg p-12">
+                                    <div className="mb-8">
+                                        <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                                            📄 个人简历
+                                        </h2>
+                                        <p className="text-xl text-gray-600 leading-relaxed">
+                                            了解更多关于我的专业背景
+                                        </p>
+                                    </div>
+                                    
+                                    <div className="flex justify-center">
+                                        <button
+                                            onClick={() => {
+                                                // TODO: 在这里添加简历PDF查看逻辑
+                                                alert('简历PDF文件尚未添加，请将简历PDF文件集成到此功能中');
+                                            }}
+                                            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg flex items-center space-x-3 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                                        >
+                                            <span className="text-2xl">👁️</span>
+                                            <span>查看我的简历</span>
+                                        </button>
+                                    </div>
+
+                                    <div className="mt-8 text-sm text-gray-500">
+                                        点击查看完整的个人简历
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Prompt Display Section */}
+                        <section className="py-20 bg-gray-50">
+                            <div className="max-w-4xl mx-auto px-6">
+                                <div className="text-center mb-12">
+                                    <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                                        🤖 网站生成 Prompt
+                                    </h2>
+                                    <p className="text-xl text-gray-600">
+                                        这个网站是如何通过 AI 对话生成的
+                                    </p>
+                                </div>
+                                
+                                <div className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 p-8 max-h-96 overflow-y-auto border border-gray-100">
+                                    <div className="bg-gray-900 rounded-lg p-6">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div className="flex space-x-2">
+                                                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                                                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                                            </div>
+                                            <span className="text-gray-400 text-sm font-mono">prompt.md</span>
+                                        </div>
+                                        <pre className="text-green-400 font-mono text-sm leading-relaxed whitespace-pre-wrap overflow-x-auto">
+{`Build a modern, minimal, single-page website with the following requirements:
+
+General style & tech stack
+- Use React + TailwindCSS + Framer Motion for layout and animations.
+- For vertical full-page card switching, use fullPage.js or Swiper (vertical mode).
+- Keep the design clean, with generous white space, rounded corners, and subtle gradients.
+- Mobile responsive, lightweight, and performance-friendly.
+
+Header / Hero
+- Top sticky navigation bar (transparent at first, then translucent glassy background on scroll).
+- Left: site title. Right: anchor links to sections + one main button "Download Answer PDF".
+- Hero section: large Chinese title 「我最喜爱的 AI 产品」 with a short subtitle under it.
+- Right side of Hero: placeholder image or geometric figure with a light parallax motion.
+- Background: soft radial gradient with floating translucent blob shapes.
+
+Core Interaction (vertical cards)
+- Main content presented as full-screen stacked cards (one card per scroll).
+- Mouse wheel / touchpad scroll switches between cards vertically.
+- Smooth transition animation: current card slides up and fades out, next card slides in and fades in.
+- Side indicator shows progress (1/4, 2/4…).
+- Support keyboard up/down navigation.
+
+Cards content (render these as 4 cards)
+Card One: Product — 语鲸
+Card Two: Product — Aivilization  
+Card Three: Experience gaps
+Card Four: If I were PM (Optimization ideas)
+
+Extra sections (normal scroll, not full screen)
+- Before or after the card set, add a "Product Highlights" 3-column grid.
+- Add a small FAQ accordion.
+- Footer: social placeholders, copyright, contact link.
+
+Component & animation details
+- Card style: 24px rounded corners, soft shadow, sufficient padding.
+- Text hierarchy clear; Aha Moment row highlighted with color block or left border.
+- On-view animations: fade-up via Framer Motion.
+- Hover effects: slight scale-up for nav buttons.
+- Scroll cue: down arrow at bottom of Hero, floating gently every 2s.
+
+Deliverables
+- A working React project (with package.json) or single-file demo.
+- Clean README with install/run instructions.
+- Code comments marking major parts.
+
+Bonus
+- Add "Export as PDF" button to combine the 4 cards into an A4-style resume PDF.
+- Accessibility: ARIA labels for nav buttons & card progress dots, keyboard navigation support.`}
+                                        </pre>
+                                    </div>
+                                </div>
+                                
+                                <div className="text-center mt-8 space-y-3">
+                                    <p className="text-gray-500 text-sm">
+                                        💡 通过一次对话，从想法到完整网站
+                                    </p>
+                                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 max-w-lg mx-auto">
+                                        <div className="flex items-start space-x-2">
+                                            <span className="text-yellow-600 text-lg">⚠️</span>
+                                            <div className="text-sm text-yellow-800">
+                                                <strong>说明：</strong>上述 Prompt 生成了网站的主要框架和基本内容，
+                                                但在实际开发过程中，还根据具体需求进行了多项细节调整和功能优化。
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Footer */}
+                        <footer className="bg-gray-900 text-white py-16">
+                        <div className="max-w-7xl mx-auto px-6 text-center">
+                            <h3 className="text-2xl font-bold mb-4">AI 产品展示</h3>
+                            <p className="text-gray-400 mb-8">
+                                探索人工智能产品的无限可能
+                            </p>
+                            <div className="text-gray-400 text-sm">
+                                © 2025 AI 产品展示. Made with ❤️ using Cursor
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
